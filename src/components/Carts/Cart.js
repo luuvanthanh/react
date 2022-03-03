@@ -1,4 +1,5 @@
 import styles from "./Cart.module.css";
+import { removeCart } from "../../redux/Shopping/shopping-actions";
 import { connect } from "react-redux";
 
 const Cart = ({order, removeCart, setQuantity}) => {

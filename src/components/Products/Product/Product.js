@@ -2,11 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Product.module.css";
 import { connect } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-const Product = ({product,addProduct}) => {
+import {addToCart} from '../../../redux/Shopping/shopping-actions';
+import {allProductsSelector} from '../../selector.js'
+
+const Product = ({addProduct}) => {
+
+    const product = useSelector(allProductsSelector);
+    const dispatch = useDispatch();
 
     function handleAddCart(item) {
-        addProduct(item)
+        dispatch(addToCart(item));
     }
 
     return (
@@ -35,15 +42,15 @@ const Product = ({product,addProduct}) => {
         
 )};
 
-// export default Product;
-function mapStateToProps(state) {
-    return { product: state.shop.product };
-}
-const mapDispatchToProps = (dispatch) => {
-	return{
-		addProduct: (item) => dispatch({type: 'ADD_PRODUCT', payload: {item}}),
-	}
+export default Product;
+// function mapStateToProps(state) {
+//     return { product: state.shop.product };
+// }
+// const mapDispatchToProps = (dispatch) => {
+// 	return{
+// 		addProduct: (item) => dispatch({type: 'ADD_PRODUCT', payload: {item}}),
+// 	}
 	
-}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+// export default connect(mapStateToProps, mapDispatchToProps)(Product);

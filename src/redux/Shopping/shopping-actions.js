@@ -1,10 +1,19 @@
-import types from "./shopping-types";
+import * as types from './shopping-types';
 
-export const addToCart = (itemID) => {
+export const addToCart = (item) => {
     return {
-        type: types.addToCart,
+        type: types.ADD_TO_CART,
         payload: {
-            id: itemID
+            item : item
+        },
+    };
+};
+
+export const removeCart = (item) => {
+    return {
+        type: types.REMOVE_ITEM,
+        payload: {
+            item
         },
     };
 };

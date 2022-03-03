@@ -6,7 +6,10 @@ import {
   } from "react-router-dom";
 import { connect } from "react-redux";
 
-const Navbar = ({quantity}) => {
+const Navbar = ({quantity, logout}) => {
+    const handleLogout = () => {
+        logout();
+    }
 
     return (
         <div className={styles.topnav}>
@@ -14,6 +17,7 @@ const Navbar = ({quantity}) => {
             <NavLink to="/" activeClassName={styles.active} exact={true}>Home</NavLink>
             <NavLink to="/products" activeClassName={styles.active}>Products</NavLink>
             <NavLink to="/carts" activeClassName={styles.active}>Cart</NavLink>
+            <NavLink to="/logout" onClick={handleLogout} activeClassName={styles.active}>Logout</NavLink>
             <div className={styles.cart}>
                 <img className={styles.avarta} src="./images/cart.jpg" />
                 <span>{quantity}</span>
@@ -32,11 +36,10 @@ function mapStateToProps(state) {
     // console.log(state.shop)
     return { quantity: state.shop.quantity};
 }
-// const mapDispatchToProps = (dispatch) => {
-// 	return{
-// 		addFood: (item) => dispatch({type: 'ADD_FOOD', payload: {item}}),
-// 	}
-	
-// }
+const mapDispatchToProps = (dispatch) => {
+	return{
+		logout: () => dispatch({type: 'LOG_OUT', payload: null}),
+	}
+}
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

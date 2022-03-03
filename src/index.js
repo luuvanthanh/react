@@ -7,12 +7,17 @@ import { createStore } from 'redux'
 import rootReducer from './redux/rootReducer'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import {persistor}  from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 ReactDOM.render(
   <React.StrictMode>
     {/* Provider để ép React khởi động cùng với Redux, store nạp vào nơi lưu trữ dữ liệu*/}
     <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <App />
+    </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
